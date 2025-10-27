@@ -1,0 +1,417 @@
+# Dokument wymagań produktu (PRD) - AI Flashcard Generator
+
+## 1. Przegląd produktu
+AI Flashcard Generator to aplikacja internetowa zaprojektowana w celu usprawnienia procesu tworzenia fiszek edukacyjnych. Aplikacja wykorzystuje sztuczną inteligencję do automatycznego generowania fiszek z tekstu dostarczonego przez użytkownika, znacznie skracając czas i wysiłek potrzebny do przygotowania materiałów do nauki. Użytkownicy mogą zarządzać swoimi fiszkami w "taliach", edytować je i wykorzystywać zintegrowany system powtórek oparty na metodzie spaced repetition, aby zoptymalizować proces uczenia się.
+
+## 2. Problem użytkownika
+Manualne tworzenie wysokiej jakości fiszek jest procesem czasochłonnym i żmudnym. Ta bariera często zniechęca potencjalnych użytkowników do korzystania z jednej z najskuteczniejszych metod nauki, jaką jest spaced repetition (powtórki w interwałach). Uczniowie, studenci i osoby uczące się przez całe życie potrzebują narzędzia, które zautomatyzuje i przyspieszy tworzenie fiszek, pozwalając im skupić się na nauce, a nie na przygotowywaniu materiałów.
+
+## 3. Wymagania funkcjonalne
+### 3.1. System kont użytkowników
+- Użytkownicy mogą założyć konto za pomocą adresu e-mail i hasła.
+- Użytkownicy mogą zalogować się na swoje konto.
+- System zapewnia bezpieczne przechowywanie danych użytkownika i jego fiszek.
+
+### 3.2. Zarządzanie taliami fiszek
+- Użytkownicy mogą tworzyć nowe, puste talie fiszek.
+- Użytkownicy mogą przeglądać listę swoich talii.
+- Użytkownicy mogą usuwać talie wraz z całą ich zawartością.
+
+### 3.3. Generowanie fiszek przez AI
+- Użytkownik może wkleić blok tekstu do dedykowanego pola w aplikacji.
+- System wykorzystuje zewnętrzny model językowy (np. GPT-3.5-Turbo) do analizy tekstu i wygenerowania propozycji fiszek w formacie "pytanie-odpowiedź".
+- Po wygenerowaniu, użytkownik jest prezentowany z listą propozycji do przeglądu.
+- Użytkownik może edytować treść pytania i odpowiedzi każdej wygenerowanej fiszki.
+- Użytkownik może indywidualnie zaakceptować ("Zachowaj") lub odrzucić ("Odrzuć") każdą propozycję.
+- Zaakceptowane fiszki są zapisywane w wybranej przez użytkownika talii.
+- Obowiązują dzienne limity użycia generatora AI w celu kontroli kosztów.
+
+### 3.4. Manualne zarządzanie fiszkami
+- Użytkownicy mogą ręcznie dodać nową fiszkę do istniejącej talii, wpisując pytanie i odpowiedź.
+- Użytkownicy mogą edytować istniejące fiszki w swoich taliach.
+- Użytkownicy mogą usuwać pojedyncze fiszki ze swoich talii.
+
+### 3.5. System powtórek (nauka)
+- Aplikacja integruje gotową bibliotekę open-source do obsługi algorytmu spaced repetition.
+- Użytkownik może rozpocząć sesję nauki dla dowolnej ze swoich talii.
+- Podczas sesji aplikacja prezentuje fiszki (stronę z pytaniem) zgodnie z algorytmem.
+- Użytkownik może odsłonić odpowiedź.
+- Po zobaczeniu odpowiedzi, użytkownik ocenia swoją znajomość fiszki za pomocą binarnej opcji: "Zapamiętane" lub "Do powtórki".
+- Na podstawie oceny algorytm planuje kolejną powtórkę danej fiszki.
+
+## 4. Granice produktu
+Następujące funkcje nie wchodzą w zakres wersji MVP (Minimum Viable Product):
+- Implementacja własnego, zaawansowanego algorytmu powtórek (np. na wzór SuperMemo, Anki).
+- Import fiszek z plików w formatach takich jak PDF, DOCX, CSV.
+- Funkcje społecznościowe, takie jak współdzielenie talii fiszek między użytkownikami.
+- Integracje z zewnętrznymi platformami edukacyjnymi (np. Moodle, Canvas).
+- Dedykowane aplikacje mobilne na systemy iOS i Android (produkt będzie dostępny jako aplikacja webowa).
+
+## 5. Historyjki użytkowników
+
+### 5.1. Zarządzanie kontem
+
+- ID: US-001
+- Tytuł: Rejestracja nowego użytkownika
+- Opis: Jako nowy użytkownik, chcę móc założyć konto używając mojego adresu e-mail i hasła, aby móc zapisywać moje fiszki i postępy w nauce.
+- Kryteria akceptacji:
+  - Formularz rejestracji zawiera pola na adres e-mail, hasło i potwierdzenie hasła.
+  - System waliduje, czy podany e-mail ma poprawny format.
+  - System waliduje, czy hasła w obu polach są identyczne.
+  - System sprawdza, czy użytkownik o podanym adresie e-mail już nie istnieje.
+  - Po pomyślnej rejestracji jestem automatycznie zalogowany i przekierowany do panelu głównego.
+  - Otrzymuję e-mail z potwierdzeniem założenia konta.
+
+- ID: US-002
+- Tytuł: Logowanie użytkownika
+- Opis: Jako zarejestrowany użytkownik, chcę móc zalogować się na moje konto, aby uzyskać dostęp do moich talii fiszek.
+- Kryteria akceptacji:
+  - Formularz logowania zawiera pola na adres e-mail i hasło.
+  - Po podaniu poprawnych danych jestem zalogowany i przekierowany do panelu głównego.
+  - W przypadku podania błędnego e-maila lub hasła, widzę stosowny komunikat o błędzie.
+
+- ID: US-003
+- Tytuł: Wylogowanie użytkownika
+- Opis: Jako zalogowany użytkownik, chcę móc się wylogować, aby zabezpieczyć dostęp do mojego konta na współdzielonym komputerze.
+- Kryteria akceptacji:
+  - W interfejsie aplikacji znajduje się widoczny przycisk "Wyloguj".
+  - Po kliknięciu przycisku moja sesja zostaje zakończona i jestem przekierowany na stronę główną lub stronę logowania.
+
+### 5.2. Zarządzanie taliami
+
+- ID: US-004
+- Tytuł: Tworzenie nowej talii
+- Opis: Jako zalogowany użytkownik, chcę móc stworzyć nową, pustą talię fiszek i nadać jej nazwę, aby móc organizować moje fiszki tematycznie.
+- Kryteria akceptacji:
+  - W panelu głównym znajduje się opcja "Stwórz nową talię".
+  - Po wybraniu opcji mogę wpisać nazwę dla nowej talii.
+  - Nowo utworzona talia pojawia się na liście moich talii.
+  - Nazwa talii musi mieć co najmniej 1 znak.
+
+- ID: US-005
+- Tytuł: Przeglądanie listy talii
+- Opis: Jako zalogowany użytkownik, chcę widzieć listę wszystkich moich talii, aby móc szybko wybrać talię do nauki lub edycji.
+- Kryteria akceptacji:
+  - Po zalogowaniu widzę listę wszystkich moich talii.
+  - Przy każdej talii widzę jej nazwę oraz liczbę fiszek, które zawiera.
+
+- ID: US-006
+- Tytuł: Usuwanie talii
+- Opis: Jako zalogowany użytkownik, chcę móc usunąć wybraną talię wraz ze wszystkimi fiszkami, które zawiera.
+- Kryteria akceptacji:
+  - Przy każdej talii na liście znajduje się opcja "Usuń".
+  - Po kliknięciu "Usuń" widzę modal z prośbą o potwierdzenie operacji, informujący, że jest ona nieodwracalna.
+  - Po potwierdzeniu, talia i wszystkie jej fiszki są trwale usuwane z mojego konta.
+
+### 5.3. Generowanie i zarządzanie fiszkami AI
+
+- ID: US-007
+- Tytuł: Inicjowanie generowania fiszek z tekstu
+- Opis: Jako zalogowany użytkownik, chcę móc wkleić tekst i uruchomić proces generowania fiszek przez AI, aby szybko stworzyć materiały do nauki.
+- Kryteria akceptacji:
+  - W aplikacji istnieje dedykowana sekcja do generowania fiszek.
+  - Widzę duże pole tekstowe, w które mogę wkleić tekst.
+  - Widzę przycisk "Generuj fiszki".
+  - Po wklejeniu tekstu i kliknięciu przycisku, widzę wskaźnik ładowania informujący o trwaniu procesu.
+  - Jeśli przekroczyłem dzienny limit użycia, widzę stosowny komunikat i przycisk jest nieaktywny.
+
+- ID: US-008
+- Tytuł: Przeglądanie i edycja wygenerowanych fiszek
+- Opis: Jako użytkownik, po zakończeniu generowania przez AI, chcę zobaczyć listę proponowanych fiszek i mieć możliwość ich edycji przed zapisaniem.
+- Kryteria akceptacji:
+  - Po zakończeniu generowania, widzę listę par "pytanie-odpowiedź".
+  - Każde pytanie i każda odpowiedź znajdują się w edytowalnym polu tekstowym.
+  - Mogę dowolnie modyfikować treść każdej wygenerowanej fiszki.
+
+- ID: US-009
+- Tytuł: Akceptacja i odrzucanie propozycji fiszek
+- Opis: Jako użytkownik, chcę móc zdecydować, którą z wygenerowanych fiszek chcę zachować, a którą odrzucić.
+- Kryteria akceptacji:
+  - Przy każdej wygenerowanej propozycji fiszki widzę przyciski "Zachowaj" i "Odrzuć".
+  - Kliknięcie "Odrzuć" powoduje usunięcie propozycji z listy.
+  - Kliknięcie "Zachowaj" oznacza chęć dodania fiszki do talii.
+  - Istnieje opcja wyboru talii docelowej dla zapisywanych fiszek.
+  - Po zakończeniu przeglądu i kliknięciu finalnego przycisku "Zapisz w talii", wszystkie fiszki oznaczone jako "Zachowaj" są dodawane do wybranej talii.
+
+### 5.4. Manualne tworzenie fiszek
+
+- ID: US-010
+- Tytuł: Ręczne dodawanie nowej fiszki
+- Opis: Jako użytkownik, chcę móc ręcznie dodać nową fiszkę do wybranej talii, wpisując jej pytanie i odpowiedź.
+- Kryteria akceptacji:
+  - W widoku talii znajduje się przycisk "Dodaj nową fiszkę".
+  - Po kliknięciu widzę formularz z polami na "Pytanie" (przód) i "Odpowiedź" (tył).
+  - Po wypełnieniu pól i zapisaniu, nowa fiszka jest dodawana do bieżącej talii.
+  - Licznik fiszek w talii jest aktualizowany.
+
+- ID: US-011
+- Tytuł: Edycja istniejącej fiszki
+- Opis: Jako użytkownik, chcę móc edytować treść istniejącej fiszki w mojej talii.
+- Kryteria akceptacji:
+  - W widoku listy fiszek w talii, przy każdej fiszce jest opcja "Edytuj".
+  - Po kliknięciu mogę zmienić treść pytania i odpowiedzi.
+  - Po zapisaniu zmian, fiszka w talii jest zaktualizowana.
+
+- ID: US-012
+- Tytuł: Usuwanie pojedynczej fiszki
+- Opis: Jako użytkownik, chcę móc usunąć pojedynczą fiszkę z mojej talii.
+- Kryteria akceptacji:
+  - W widoku listy fiszek w talii, przy każdej fiszce jest opcja "Usuń".
+  - Po kliknięciu i potwierdzeniu, fiszka jest trwale usuwana z talii.
+  - Licznik fiszek w talii jest aktualizowany.
+
+### 5.5. Sesja nauki
+
+- ID: US-013
+- Tytuł: Rozpoczynanie sesji nauki
+- Opis: Jako użytkownik, chcę móc rozpocząć sesję nauki dla wybranej talii, aby zacząć powtarzać materiał.
+- Kryteria akceptacji:
+  - Na liście talii oraz w widoku talii znajduje się przycisk "Rozpocznij naukę".
+  - Po kliknięciu przycisku rozpoczyna się sesja nauki, prezentując pierwszą fiszkę do powtórki.
+  - Fiszki do powtórki są wybierane przez zintegrowany algorytm spaced repetition.
+
+- ID: US-014
+- Tytuł: Przeprowadzanie powtórki fiszki
+- Opis: Jako użytkownik w trakcie sesji nauki, chcę zobaczyć pytanie, następnie odsłonić odpowiedź i ocenić, czy ją znam.
+- Kryteria akceptacji:
+  - Widzę pytanie (przód) fiszki.
+  - W interfejsie znajduje się przycisk "Pokaż odpowiedź".
+  - Po kliknięciu przycisku, widzę odpowiedź (tył) fiszki.
+  - Po odsłonięciu odpowiedzi pojawiają się dwa przyciski oceny: "Zapamiętane" i "Do powtórki".
+  - Kliknięcie jednego z przycisków oceny zapisuje mój wybór i prezentuje kolejną fiszkę (lub kończy sesję, jeśli nie ma więcej fiszek).
+
+- ID: US-015
+- Tytuł: Zakończenie sesji nauki
+- Opis: Jako użytkownik, chcę, aby sesja nauki kończyła się po przejrzeniu wszystkich zaplanowanych na dany moment fiszek.
+- Kryteria akceptacji:
+  - Po ocenieniu ostatniej fiszki zaplanowanej na daną sesję, widzę ekran podsumowania.
+  - Ekran podsumowania może zawierać proste statystyki, np. liczbę powtórzonych fiszek.
+  - Z ekranu podsumowania mogę wrócić do panelu głównego lub widoku talii.
+
+## 6. Metryki sukcesu
+### 6.1. Metryki produktu
+- Wskaźnik akceptacji fiszek AI:
+  - Cel: 75%
+  - Pomiar: Stosunek liczby fiszek, przy których użytkownik kliknął "Zachowaj", do całkowitej liczby wygenerowanych propozycji (zachowane + odrzucone). Wymaga śledzenia zdarzeń dla przycisków "Zachowaj" i "Odrzuć".
+
+- Udział fiszek stworzonych przez AI:
+  - Cel: 75%
+  - Pomiar: Stosunek liczby fiszek w systemie, które pochodzą z generatora AI, do całkowitej liczby fiszek (stworzone przez AI + dodane manualnie).
+
+### 6.2. Metryki zaangażowania
+- Retencja użytkowników:
+  - Cel: Utrzymanie jak najwyższych wskaźników.
+  - Pomiar: Procent użytkowników powracających do aplikacji w dniach 1, 7 i 30 po rejestracji (D1, D7, D30).
+
+- Aktywność w nauce:
+  - Cel: Utrzymanie regularnego zaangażowania.
+  - Pomiar: Średnia liczba sesji nauki na aktywnego użytkownika tygodniowo.
+```// filepath: .ai/prd.md
+# Dokument wymagań produktu (PRD) - AI Flashcard Generator
+
+## 1. Przegląd produktu
+AI Flashcard Generator to aplikacja internetowa zaprojektowana w celu usprawnienia procesu tworzenia fiszek edukacyjnych. Aplikacja wykorzystuje sztuczną inteligencję do automatycznego generowania fiszek z tekstu dostarczonego przez użytkownika, znacznie skracając czas i wysiłek potrzebny do przygotowania materiałów do nauki. Użytkownicy mogą zarządzać swoimi fiszkami w "taliach", edytować je i wykorzystywać zintegrowany system powtórek oparty na metodzie spaced repetition, aby zoptymalizować proces uczenia się.
+
+## 2. Problem użytkownika
+Manualne tworzenie wysokiej jakości fiszek jest procesem czasochłonnym i żmudnym. Ta bariera często zniechęca potencjalnych użytkowników do korzystania z jednej z najskuteczniejszych metod nauki, jaką jest spaced repetition (powtórki w interwałach). Uczniowie, studenci i osoby uczące się przez całe życie potrzebują narzędzia, które zautomatyzuje i przyspieszy tworzenie fiszek, pozwalając im skupić się na nauce, a nie na przygotowywaniu materiałów.
+
+## 3. Wymagania funkcjonalne
+### 3.1. System kont użytkowników
+- Użytkownicy mogą założyć konto za pomocą adresu e-mail i hasła.
+- Użytkownicy mogą zalogować się na swoje konto.
+- System zapewnia bezpieczne przechowywanie danych użytkownika i jego fiszek.
+
+### 3.2. Zarządzanie taliami fiszek
+- Użytkownicy mogą tworzyć nowe, puste talie fiszek.
+- Użytkownicy mogą przeglądać listę swoich talii.
+- Użytkownicy mogą usuwać talie wraz z całą ich zawartością.
+
+### 3.3. Generowanie fiszek przez AI
+- Użytkownik może wkleić blok tekstu do dedykowanego pola w aplikacji.
+- System wykorzystuje zewnętrzny model językowy (np. GPT-3.5-Turbo) do analizy tekstu i wygenerowania propozycji fiszek w formacie "pytanie-odpowiedź".
+- Po wygenerowaniu, użytkownik jest prezentowany z listą propozycji do przeglądu.
+- Użytkownik może edytować treść pytania i odpowiedzi każdej wygenerowanej fiszki.
+- Użytkownik może indywidualnie zaakceptować ("Zachowaj") lub odrzucić ("Odrzuć") każdą propozycję.
+- Zaakceptowane fiszki są zapisywane w wybranej przez użytkownika talii.
+- Obowiązują dzienne limity użycia generatora AI w celu kontroli kosztów.
+
+### 3.4. Manualne zarządzanie fiszkami
+- Użytkownicy mogą ręcznie dodać nową fiszkę do istniejącej talii, wpisując pytanie i odpowiedź.
+- Użytkownicy mogą edytować istniejące fiszki w swoich taliach.
+- Użytkownicy mogą usuwać pojedyncze fiszki ze swoich talii.
+
+### 3.5. System powtórek (nauka)
+- Aplikacja integruje gotową bibliotekę open-source do obsługi algorytmu spaced repetition.
+- Użytkownik może rozpocząć sesję nauki dla dowolnej ze swoich talii.
+- Podczas sesji aplikacja prezentuje fiszki (stronę z pytaniem) zgodnie z algorytmem.
+- Użytkownik może odsłonić odpowiedź.
+- Po zobaczeniu odpowiedzi, użytkownik ocenia swoją znajomość fiszki za pomocą binarnej opcji: "Zapamiętane" lub "Do powtórki".
+- Na podstawie oceny algorytm planuje kolejną powtórkę danej fiszki.
+
+## 4. Granice produktu
+Następujące funkcje nie wchodzą w zakres wersji MVP (Minimum Viable Product):
+- Implementacja własnego, zaawansowanego algorytmu powtórek (np. na wzór SuperMemo, Anki).
+- Import fiszek z plików w formatach takich jak PDF, DOCX, CSV.
+- Funkcje społecznościowe, takie jak współdzielenie talii fiszek między użytkownikami.
+- Integracje z zewnętrznymi platformami edukacyjnymi (np. Moodle, Canvas).
+- Dedykowane aplikacje mobilne na systemy iOS i Android (produkt będzie dostępny jako aplikacja webowa).
+
+## 5. Historyjki użytkowników
+
+### 5.1. Zarządzanie kontem
+
+- ID: US-001
+- Tytuł: Rejestracja nowego użytkownika
+- Opis: Jako nowy użytkownik, chcę móc założyć konto używając mojego adresu e-mail i hasła, aby móc zapisywać moje fiszki i postępy w nauce.
+- Kryteria akceptacji:
+  - Formularz rejestracji zawiera pola na adres e-mail, hasło i potwierdzenie hasła.
+  - System waliduje, czy podany e-mail ma poprawny format.
+  - System waliduje, czy hasła w obu polach są identyczne.
+  - System sprawdza, czy użytkownik o podanym adresie e-mail już nie istnieje.
+  - Po pomyślnej rejestracji jestem automatycznie zalogowany i przekierowany do panelu głównego.
+  - Otrzymuję e-mail z potwierdzeniem założenia konta.
+
+- ID: US-002
+- Tytuł: Logowanie użytkownika
+- Opis: Jako zarejestrowany użytkownik, chcę móc zalogować się na moje konto, aby uzyskać dostęp do moich talii fiszek.
+- Kryteria akceptacji:
+  - Formularz logowania zawiera pola na adres e-mail i hasło.
+  - Po podaniu poprawnych danych jestem zalogowany i przekierowany do panelu głównego.
+  - W przypadku podania błędnego e-maila lub hasła, widzę stosowny komunikat o błędzie.
+
+- ID: US-003
+- Tytuł: Wylogowanie użytkownika
+- Opis: Jako zalogowany użytkownik, chcę móc się wylogować, aby zabezpieczyć dostęp do mojego konta na współdzielonym komputerze.
+- Kryteria akceptacji:
+  - W interfejsie aplikacji znajduje się widoczny przycisk "Wyloguj".
+  - Po kliknięciu przycisku moja sesja zostaje zakończona i jestem przekierowany na stronę główną lub stronę logowania.
+
+### 5.2. Zarządzanie taliami
+
+- ID: US-004
+- Tytuł: Tworzenie nowej talii
+- Opis: Jako zalogowany użytkownik, chcę móc stworzyć nową, pustą talię fiszek i nadać jej nazwę, aby móc organizować moje fiszki tematycznie.
+- Kryteria akceptacji:
+  - W panelu głównym znajduje się opcja "Stwórz nową talię".
+  - Po wybraniu opcji mogę wpisać nazwę dla nowej talii.
+  - Nowo utworzona talia pojawia się na liście moich talii.
+  - Nazwa talii musi mieć co najmniej 1 znak.
+
+- ID: US-005
+- Tytuł: Przeglądanie listy talii
+- Opis: Jako zalogowany użytkownik, chcę widzieć listę wszystkich moich talii, aby móc szybko wybrać talię do nauki lub edycji.
+- Kryteria akceptacji:
+  - Po zalogowaniu widzę listę wszystkich moich talii.
+  - Przy każdej talii widzę jej nazwę oraz liczbę fiszek, które zawiera.
+
+- ID: US-006
+- Tytuł: Usuwanie talii
+- Opis: Jako zalogowany użytkownik, chcę móc usunąć wybraną talię wraz ze wszystkimi fiszkami, które zawiera.
+- Kryteria akceptacji:
+  - Przy każdej talii na liście znajduje się opcja "Usuń".
+  - Po kliknięciu "Usuń" widzę modal z prośbą o potwierdzenie operacji, informujący, że jest ona nieodwracalna.
+  - Po potwierdzeniu, talia i wszystkie jej fiszki są trwale usuwane z mojego konta.
+
+### 5.3. Generowanie i zarządzanie fiszkami AI
+
+- ID: US-007
+- Tytuł: Inicjowanie generowania fiszek z tekstu
+- Opis: Jako zalogowany użytkownik, chcę móc wkleić tekst i uruchomić proces generowania fiszek przez AI, aby szybko stworzyć materiały do nauki.
+- Kryteria akceptacji:
+  - W aplikacji istnieje dedykowana sekcja do generowania fiszek.
+  - Widzę duże pole tekstowe, w które mogę wkleić tekst.
+  - Widzę przycisk "Generuj fiszki".
+  - Po wklejeniu tekstu i kliknięciu przycisku, widzę wskaźnik ładowania informujący o trwaniu procesu.
+  - Jeśli przekroczyłem dzienny limit użycia, widzę stosowny komunikat i przycisk jest nieaktywny.
+
+- ID: US-008
+- Tytuł: Przeglądanie i edycja wygenerowanych fiszek
+- Opis: Jako użytkownik, po zakończeniu generowania przez AI, chcę zobaczyć listę proponowanych fiszek i mieć możliwość ich edycji przed zapisaniem.
+- Kryteria akceptacji:
+  - Po zakończeniu generowania, widzę listę par "pytanie-odpowiedź".
+  - Każde pytanie i każda odpowiedź znajdują się w edytowalnym polu tekstowym.
+  - Mogę dowolnie modyfikować treść każdej wygenerowanej fiszki.
+
+- ID: US-009
+- Tytuł: Akceptacja i odrzucanie propozycji fiszek
+- Opis: Jako użytkownik, chcę móc zdecydować, którą z wygenerowanych fiszek chcę zachować, a którą odrzucić.
+- Kryteria akceptacji:
+  - Przy każdej wygenerowanej propozycji fiszki widzę przyciski "Zachowaj" i "Odrzuć".
+  - Kliknięcie "Odrzuć" powoduje usunięcie propozycji z listy.
+  - Kliknięcie "Zachowaj" oznacza chęć dodania fiszki do talii.
+  - Istnieje opcja wyboru talii docelowej dla zapisywanych fiszek.
+  - Po zakończeniu przeglądu i kliknięciu finalnego przycisku "Zapisz w talii", wszystkie fiszki oznaczone jako "Zachowaj" są dodawane do wybranej talii.
+
+### 5.4. Manualne tworzenie fiszek
+
+- ID: US-010
+- Tytuł: Ręczne dodawanie nowej fiszki
+- Opis: Jako użytkownik, chcę móc ręcznie dodać nową fiszkę do wybranej talii, wpisując jej pytanie i odpowiedź.
+- Kryteria akceptacji:
+  - W widoku talii znajduje się przycisk "Dodaj nową fiszkę".
+  - Po kliknięciu widzę formularz z polami na "Pytanie" (przód) i "Odpowiedź" (tył).
+  - Po wypełnieniu pól i zapisaniu, nowa fiszka jest dodawana do bieżącej talii.
+  - Licznik fiszek w talii jest aktualizowany.
+
+- ID: US-011
+- Tytuł: Edycja istniejącej fiszki
+- Opis: Jako użytkownik, chcę móc edytować treść istniejącej fiszki w mojej talii.
+- Kryteria akceptacji:
+  - W widoku listy fiszek w talii, przy każdej fiszce jest opcja "Edytuj".
+  - Po kliknięciu mogę zmienić treść pytania i odpowiedzi.
+  - Po zapisaniu zmian, fiszka w talii jest zaktualizowana.
+
+- ID: US-012
+- Tytuł: Usuwanie pojedynczej fiszki
+- Opis: Jako użytkownik, chcę móc usunąć pojedynczą fiszkę z mojej talii.
+- Kryteria akceptacji:
+  - W widoku listy fiszek w talii, przy każdej fiszce jest opcja "Usuń".
+  - Po kliknięciu i potwierdzeniu, fiszka jest trwale usuwana z talii.
+  - Licznik fiszek w talii jest aktualizowany.
+
+### 5.5. Sesja nauki
+
+- ID: US-013
+- Tytuł: Rozpoczynanie sesji nauki
+- Opis: Jako użytkownik, chcę móc rozpocząć sesję nauki dla wybranej talii, aby zacząć powtarzać materiał.
+- Kryteria akceptacji:
+  - Na liście talii oraz w widoku talii znajduje się przycisk "Rozpocznij naukę".
+  - Po kliknięciu przycisku rozpoczyna się sesja nauki, prezentując pierwszą fiszkę do powtórki.
+  - Fiszki do powtórki są wybierane przez zintegrowany algorytm spaced repetition.
+
+- ID: US-014
+- Tytuł: Przeprowadzanie powtórki fiszki
+- Opis: Jako użytkownik w trakcie sesji nauki, chcę zobaczyć pytanie, następnie odsłonić odpowiedź i ocenić, czy ją znam.
+- Kryteria akceptacji:
+  - Widzę pytanie (przód) fiszki.
+  - W interfejsie znajduje się przycisk "Pokaż odpowiedź".
+  - Po kliknięciu przycisku, widzę odpowiedź (tył) fiszki.
+  - Po odsłonięciu odpowiedzi pojawiają się dwa przyciski oceny: "Zapamiętane" i "Do powtórki".
+  - Kliknięcie jednego z przycisków oceny zapisuje mój wybór i prezentuje kolejną fiszkę (lub kończy sesję, jeśli nie ma więcej fiszek).
+
+- ID: US-015
+- Tytuł: Zakończenie sesji nauki
+- Opis: Jako użytkownik, chcę, aby sesja nauki kończyła się po przejrzeniu wszystkich zaplanowanych na dany moment fiszek.
+- Kryteria akceptacji:
+  - Po ocenieniu ostatniej fiszki zaplanowanej na daną sesję, widzę ekran podsumowania.
+  - Ekran podsumowania może zawierać proste statystyki, np. liczbę powtórzonych fiszek.
+  - Z ekranu podsumowania mogę wrócić do panelu głównego lub widoku talii.
+
+## 6. Metryki sukcesu
+### 6.1. Metryki produktu
+- Wskaźnik akceptacji fiszek AI:
+  - Cel: 75%
+  - Pomiar: Stosunek liczby fiszek, przy których użytkownik kliknął "Zachowaj", do całkowitej liczby wygenerowanych propozycji (zachowane + odrzucone). Wymaga śledzenia zdarzeń dla przycisków "Zachowaj" i "Odrzuć".
+
+- Udział fiszek stworzonych przez AI:
+  - Cel: 75%
+  - Pomiar: Stosunek liczby fiszek w systemie, które pochodzą z generatora AI, do całkowitej liczby fiszek (stworzone przez AI + dodane manualnie).
+
+### 6.2. Metryki zaangażowania
+- Retencja użytkowników:
+  - Cel: Utrzymanie jak najwyższych wskaźników.
+  - Pomiar: Procent użytkowników powracających do aplikacji w dniach 1, 7 i 30 po rejestracji (D1, D7, D30).
+
+- Aktywność w nauce:
+  - Cel: Utrzymanie regularnego zaangażowania.
+  - Pomiar: Średnia liczba sesji nauki na aktywnego użytkownika tygodniowo.
