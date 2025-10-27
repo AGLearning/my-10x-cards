@@ -1,7 +1,7 @@
 # Dokument wymagań produktu (PRD) - AI Flashcard Generator
 
 ## 1. Przegląd produktu
-AI Flashcard Generator to aplikacja internetowa zaprojektowana w celu usprawnienia procesu tworzenia fiszek edukacyjnych. Aplikacja wykorzystuje sztuczną inteligencję do automatycznego generowania fiszek z tekstu dostarczonego przez użytkownika, znacznie skracając czas i wysiłek potrzebny do przygotowania materiałów do nauki. Użytkownicy mogą zarządzać swoimi fiszkami w "taliach", edytować je i wykorzystywać zintegrowany system powtórek oparty na metodzie spaced repetition, aby zoptymalizować proces uczenia się.
+My10xCards to aplikacja internetowa zaprojektowana w celu usprawnienia procesu tworzenia fiszek edukacyjnych. Aplikacja wykorzystuje sztuczną inteligencję do automatycznego generowania fiszek z tekstu dostarczonego przez użytkownika, znacznie skracając czas i wysiłek potrzebny do przygotowania materiałów do nauki. Użytkownicy mogą zarządzać swoimi fiszkami w "taliach", edytować je i wykorzystywać zintegrowany system powtórek oparty na metodzie spaced repetition, aby zoptymalizować proces uczenia się.
 
 ## 2. Problem użytkownika
 Manualne tworzenie wysokiej jakości fiszek jest procesem czasochłonnym i żmudnym. Ta bariera często zniechęca potencjalnych użytkowników do korzystania z jednej z najskuteczniejszych metod nauki, jaką jest spaced repetition (powtórki w interwałach). Uczniowie, studenci i osoby uczące się przez całe życie potrzebują narzędzia, które zautomatyzuje i przyspieszy tworzenie fiszek, pozwalając im skupić się na nauce, a nie na przygotowywaniu materiałów.
